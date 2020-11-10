@@ -73,7 +73,10 @@ public class MyReceiver extends BroadcastReceiver {
     }
 
     public void Descargar(String url){
-       // String url="https://firebasestorage.googleapis.com/v0/b/toks-4278b.appspot.com/o/Descarga%201.1.0.apk?alt=media&token=7e71ed09-0ad9-44f4-b303-eb0a526bd134";
+       // String url=
+        // "https://firebasestorage.googleapis.com/v0/b/toks-4278b.appspot.com/o/Descarga%201.1.0.apk?alt=media&token=7e71ed09-0ad9-44f4-b303-eb0a526bd134";
+        //https://firebasestorage.googleapis.com/v0/b/toks-4278b.appspot.com/o/Descarga%202.0.0.apk?alt=media&token=b6388f8f-6247-42dd-96f5-48f7801e20f9
+
         DownloadManager.Request my_Request;
 
         my_DownloadManager=(DownloadManager) my_context.getSystemService(Context.DOWNLOAD_SERVICE);
