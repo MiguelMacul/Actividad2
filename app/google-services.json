@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "394612154288",
+    "firebase_url": "https://toks-4278b.firebaseio.com",
+    "project_id": "toks-4278b",
+    "storage_bucket": "toks-4278b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:394612154288:android:87a9914f96e3aaf8ed0075",
+        "android_client_info": {
+          "package_name": "com.underpro.descarga"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "394612154288-4pfue9q9eiqicdurpsr2dja3enikptpt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVXtLAW5w0JS5pPGgw1wUhkp1T1z7Xn44"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "394612154288-4pfue9q9eiqicdurpsr2dja3enikptpt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
