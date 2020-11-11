@@ -25,7 +25,7 @@ public class MyReceiver extends BroadcastReceiver {
     private Activity my_activity;
 
     public MyReceiver(Activity activity_) {
-        this.my_context=activity_;
+        this.my_context=activity_.getApplicationContext();
         this.my_activity=activity_;
 
         my_IntentFilter=new IntentFilter();
@@ -86,17 +86,20 @@ public class MyReceiver extends BroadcastReceiver {
         String name= URLUtil.guessFileName(url,null,fileExtension);
 
         //crear la carpeta
+
+
         File miFile=new File(Environment.getExternalStorageDirectory(),"apk");
-        boolean isCreada=miFile.exists();
+       boolean isCreada=miFile.exists();
 
         if(isCreada==false){
             isCreada=miFile.mkdirs();
         }
 
 
+        System.out.println();
         my_Request.setDestinationInExternalPublicDir("/apk",name);
 
-        String h=my_Request.setDestinationInExternalPublicDir("/apk",name).toString();
+        String h=my_Request.setDestinationInExternalPublicDir("/apk/",name).toString();
 
         Log.e("ruta_apk",h);
 
