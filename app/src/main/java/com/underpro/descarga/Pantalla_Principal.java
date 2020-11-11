@@ -14,9 +14,9 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Pantalla_Principal  extends AppCompatActivity {
 
-    String version_actual="1.0.0";
-    String version_firebase;
-    String url_firebase;
+    public static String version_actual="1.0.0";
+    public static String version_firebase;
+    public static String url_firebase;
 
     TextView txtVersion;
 
@@ -65,8 +65,7 @@ public class Pantalla_Principal  extends AppCompatActivity {
                 else{
 
                     Intent pantaActualizar=new Intent(getApplicationContext(),Pantalla_Actualizar.class);
-                    pantaActualizar.putExtra("version",version_firebase);
-                    pantaActualizar.putExtra("url",url_firebase);
+
                     finish();
                     startActivity(pantaActualizar);
                 }
