@@ -27,12 +27,9 @@ public class Pantalla_Principal  extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         setContentView(R.layout.pantalla_principal);
         txtVersion=(TextView) findViewById(R.id.txt_version);
         txtVersion.setText("Version "+version_actual);
-
         isStoragePermissionGranted();
 
 
@@ -83,11 +80,8 @@ public class Pantalla_Principal  extends AppCompatActivity {
 
     public  boolean isStoragePermissionGranted() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    == PackageManager.PERMISSION_GRANTED) {
+            if ( checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 Log.v("Evento_Action", "Permission is granted");
-
-
                 this.Obtener_Firebase();
                 return true;
             } else {
@@ -97,8 +91,11 @@ public class Pantalla_Principal  extends AppCompatActivity {
                 return false;
             }
         } else { //permission is automatically granted on sdk<23 upon installation
-            Log.v("Evento_Action", "Permission is granted");
+
             this.Obtener_Firebase();
+
+            Log.v("Evento_Action", "Permission is granted");
+
             return true;
         }
 
@@ -115,7 +112,6 @@ public class Pantalla_Principal  extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(requestCode==1){
             this.Obtener_Firebase();
-
         }
     }
 }

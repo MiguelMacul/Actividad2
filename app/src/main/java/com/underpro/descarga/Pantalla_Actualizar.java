@@ -1,4 +1,5 @@
 package com.underpro.descarga;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -11,12 +12,14 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+
 import Clases.MyReceiver;
 import Clases.adaptador;
 import Clases.presetdata;
@@ -30,6 +33,21 @@ public class Pantalla_Actualizar extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pantalla_actualizar);
+        cargadatos();
+        Init();
+        btn_descargar = (Button) findViewById(R.id.btn_Actualizar);
+        btn_descargar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (view.getId()==R.id.btn_Actualizar){
+                oMyReceiver.Descargar(url);
+                    cargadatos();
+                }
+            }
+        });
+    }
+
+    public void cargadatos(){
         RecyclerView recyclerView = (RecyclerView) this.findViewById(R.id.reciclercontenedor);
         this.recyclerViewDatos = recyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -38,17 +56,6 @@ public class Pantalla_Actualizar extends AppCompatActivity {
         this.recyclerViewDatos.setAdapter(adapterunionRecycler);
         version = Pantalla_Principal.version_firebase;
         url = Pantalla_Principal.url_firebase;
-        Init();
-        btn_descargar = (Button) findViewById(R.id.btn_Actualizar);
-        btn_descargar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                oMyReceiver.Descargar(url);
-
-
-            }
-        });
     }
     private void Init() {
         ReceiverListener receiverListener = new ReceiverListener() {
@@ -91,18 +98,23 @@ public class Pantalla_Actualizar extends AppCompatActivity {
     public List<presetdata> obtenerDatos() {
         List<presetdata> data = new ArrayList<>();
         File f = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "apk");
-        File file[] = f.listFiles();
-        for(int i=0;i<file.length;i++){
-            String direccion=file[i].toString();
-            long ms = file[i].lastModified();
-            Date d = new Date(ms);
-            Calendar c = new GregorianCalendar();
-            c.setTime(d);
-            if((direccion.substring(direccion.lastIndexOf("."),direccion.length())).equals(".apk"))
-            data.add(new presetdata(direccion.substring(direccion.lastIndexOf("/")+1, direccion.lastIndexOf(" ")),
-                    direccion.substring(direccion.lastIndexOf(" "), direccion.lastIndexOf(".")),
-                    ""+c.get(Calendar.DATE)+"/"+c.get(Calendar.MONTH)+"/"+c.get(Calendar.YEAR), R.drawable.ic_launcher_foreground));
+        if(f.exists()){
+            File file[] = f.listFiles();
+            for(int i=0;i<file.length;i++){
+                String direccion=file[i].toString();
+                long ms = file[i].lastModified();
+                Date d = new Date(ms);
+                Calendar c = new GregorianCalendar();
+                c.setTime(d);
+                if((direccion.substring(direccion.lastIndexOf("."),direccion.length())).equals(".apk"))
+                data.add(new presetdata(direccion.substring(direccion.lastIndexOf("/")+1, direccion.lastIndexOf(" ")),
+                        direccion.substring(direccion.lastIndexOf(" "), direccion.lastIndexOf(".")),
+                        ""+c.get(Calendar.DATE)+"/"+c.get(Calendar.MONTH)+"/"+c.get(Calendar.YEAR), R.drawable.ic_launcher_foreground));
+            }
         }
         return data;
     }
+
+
+
 }
