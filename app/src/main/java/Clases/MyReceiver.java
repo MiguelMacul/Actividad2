@@ -86,8 +86,10 @@ public class MyReceiver extends BroadcastReceiver {
         File file[] = f.listFiles();
         for(int i=0;i<file.length;i++){
             String direccion=file[i].toString();
-            if((direccion.substring(direccion.lastIndexOf("Descarga"),direccion.lastIndexOf(" "))).equals("Descargar"))
-                file[i].delete();
+            /*if((direccion.substring(direccion.lastIndexOf("Descarga"),direccion.lastIndexOf(" ")-1)).equals("Descargar"))
+              file[i].delete();*/
+
+
         }
         my_Request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS + "/apk", name.replace("%", ""));
         String h = my_Request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS + "/apk", name.replace("%", "")).toString();
