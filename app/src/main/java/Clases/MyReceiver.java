@@ -18,11 +18,9 @@ import com.underpro.descarga.ReceiverListener;
 import java.io.File;
 
 public class MyReceiver extends BroadcastReceiver {
-
     DownloadManager my_DownloadManager;
     long tamaño;
     IntentFilter my_IntentFilter;
-
     private static final String TAG = "MyReceiver";
     private Context my_context;
     private Activity my_activity;
@@ -36,31 +34,23 @@ public class MyReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-
         Log.e("Evento_Action", intent.getAction());
-
         String action = intent.getAction();
-
         if (DownloadManager.ACTION_DOWNLOAD_COMPLETE.equals(action)) {
             intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, 0);
             DownloadManager.Query query = new DownloadManager.Query();
             query.setFilterById(tamaño);
-
             Cursor cursor = my_DownloadManager.query(query);
-
             if (cursor.moveToFirst()) {
                 int columnIndex = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS);
                 if (DownloadManager.STATUS_SUCCESSFUL == cursor.getInt(columnIndex)) {
-
                     String uriString = cursor.getString(cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI));
                     String filename = uriString.substring(uriString.lastIndexOf('/') + 1, uriString.length()).replace("%20", " ");
                     Log.i(TAG, "onReceive: " + filename);
                     File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/apk", filename);
                     Log.i(TAG, "onReceive: " + file.getAbsolutePath());
                     receiverListener.onInstall(file);
-
                     cursor.close();
-
                 }
             }
 
@@ -86,13 +76,19 @@ public class MyReceiver extends BroadcastReceiver {
 
         //crear la carpeta
         File miFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "apk");
+
         boolean isCreada = miFile.exists();
 
         if (isCreada == false) {
             isCreada = miFile.mkdirs();
         }
-
-
+        File f = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "apk");
+        File file[] = f.listFiles();
+        for(int i=0;i<file.length;i++){
+            String direccion=file[i].toString();
+            if((direccion.substring(direccion.lastIndexOf("Descarga"),direccion.lastIndexOf(" "))).equals("Descargar"))
+                file[i].delete();
+        }
         my_Request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS + "/apk", name.replace("%", ""));
         String h = my_Request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS + "/apk", name.replace("%", "")).toString();
 
