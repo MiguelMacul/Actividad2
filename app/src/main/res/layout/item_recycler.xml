@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,10 +10,9 @@
     android:paddingBottom="5dp">
 
     <LinearLayout
-        android:layout_width="405dp"
+        android:layout_width="396dp"
         android:layout_height="208dp"
-        android:background="@color/colorPrimary"
-        android:baselineAligned="false"
+        android:baselineAligned="true"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -21,15 +20,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
+            android:layout_width="371dp"
             android:layout_height="match_parent"
-            android:background="#01579B"
             android:paddingRight="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@android:color/holo_blue_dark"
+                android:background="@drawable/forma"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -81,4 +79,4 @@
             </LinearLayout>
         </android.support.v7.widget.CardView>
     </LinearLayout>
-</android.support.v7.widget.LinearLayoutCompat>
+</android.support.constraint.ConstraintLayout>
