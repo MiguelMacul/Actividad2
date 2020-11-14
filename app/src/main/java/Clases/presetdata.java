@@ -1,7 +1,6 @@
 package Clases;
 
 public class presetdata {
-    protected String Nombre;
     protected String Version;
     protected String fecha;
     protected int Icono;
@@ -9,19 +8,10 @@ public class presetdata {
     public presetdata() {
     }
 
-    public presetdata(String nombre, String version, String fecha, int icono) {
-        Nombre = nombre;
+    public presetdata( String version, String fecha, int icono) {
         Version = version;
         this.fecha = fecha;
         Icono = icono;
-    }
-
-    public String getNombre() {
-        return Nombre;
-    }
-
-    public void setNombre(String nombre) {
-        Nombre = nombre;
     }
 
     public String getVersion() {

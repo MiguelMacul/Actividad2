@@ -111,11 +111,8 @@ public class Pantalla_Actualizar extends AppCompatActivity {
                 Calendar c = new GregorianCalendar();
                 c.setTime(d);
                 if((direccion.substring(direccion.lastIndexOf("."),direccion.length())).equals(".apk"))
-                data.add(new presetdata(direccion.substring(direccion.lastIndexOf("/")+1, direccion.lastIndexOf(" ")),
-                        "Version: "+direccion.substring(direccion.lastIndexOf(" "), direccion.lastIndexOf(".")),
-                        "Fecha: "+c.get(Calendar.DATE)+"/"+c.get(Calendar.MONTH)+"/"+c.get(Calendar.YEAR), R.mipmap.ic_launcher_round));
-
-
+                data.add(new presetdata("                 "+direccion.substring(direccion.lastIndexOf(" "), direccion.lastIndexOf(".")),
+                        "              "+c.get(Calendar.DATE)+"/"+c.get(Calendar.MONTH)+"/"+c.get(Calendar.YEAR), R.mipmap.ic_launcher_round));
 
             }
         }
