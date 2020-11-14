@@ -31,8 +31,6 @@ public class Pantalla_Principal  extends AppCompatActivity {
         txtVersion=(TextView) findViewById(R.id.txt_version);
         txtVersion.setText("Version "+version_actual);
         isStoragePermissionGranted();
-
-
     }
 
     protected void onStart() {

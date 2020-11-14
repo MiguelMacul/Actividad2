@@ -1,5 +1,4 @@
 package com.underpro.descarga;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -12,28 +11,28 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-
 import Clases.MyReceiver;
 import Clases.adaptador;
 import Clases.presetdata;
 public class Pantalla_Actualizar extends AppCompatActivity {
-    MyReceiver oMyReceiver;
-    Button btn_descargar;
-    String url, version;
+    private MyReceiver oMyReceiver;
+    private Button btn_descargar;
+    private String url, version;
     private adaptador adaptadordatos;
     private RecyclerView recyclerViewDatos;
-    @Override
+    private ReceiverListener receiverListener;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pantalla_actualizar);
         cargadatos();
+        version = Pantalla_Principal.version_firebase;
+        url = Pantalla_Principal.url_firebase;
         Init();
         btn_descargar = (Button) findViewById(R.id.btn_Actualizar);
         btn_descargar.setOnClickListener(new View.OnClickListener() {
@@ -46,19 +45,25 @@ public class Pantalla_Actualizar extends AppCompatActivity {
             }
         });
     }
-
     public void cargadatos(){
         RecyclerView recyclerView = (RecyclerView) this.findViewById(R.id.reciclercontenedor);
         this.recyclerViewDatos = recyclerView;
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewDatos.setLayoutManager(new LinearLayoutManager(this));
         adaptador adapterunionRecycler = new adaptador(obtenerDatos());
         this.adaptadordatos = adapterunionRecycler;
-        this.recyclerViewDatos.setAdapter(adapterunionRecycler);
-        version = Pantalla_Principal.version_firebase;
-        url = Pantalla_Principal.url_firebase;
+        this.recyclerViewDatos.setAdapter(this.adaptadordatos);
+        adaptadordatos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                File f = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "apk");
+                File file[] = f.listFiles();
+                receiverListener.onInstall( file[recyclerViewDatos.getChildAdapterPosition(view)]);
+                //System.out.println(recyclerViewDatos.getChildAdapterPosition(view)+"\t"+data.get(recyclerViewDatos.getChildAdapterPosition(view)).getNombre());
+            }
+        });
     }
     private void Init() {
-        ReceiverListener receiverListener = new ReceiverListener() {
+         receiverListener = new ReceiverListener() {
             @Override
             public void onInstall(File file) {
                 System.out.print(file);
@@ -80,7 +85,6 @@ public class Pantalla_Actualizar extends AppCompatActivity {
             }
         };
         oMyReceiver = new MyReceiver(Pantalla_Actualizar.this, receiverListener);
-
     }
     @Override
     protected void onPause() {
@@ -96,7 +100,7 @@ public class Pantalla_Actualizar extends AppCompatActivity {
     }
 
     public List<presetdata> obtenerDatos() {
-        List<presetdata> data = new ArrayList<>();
+        List<presetdata> data=new ArrayList<>() ;
         File f = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "apk");
         if(f.exists()){
             File file[] = f.listFiles();
@@ -109,7 +113,10 @@ public class Pantalla_Actualizar extends AppCompatActivity {
                 if((direccion.substring(direccion.lastIndexOf("."),direccion.length())).equals(".apk"))
                 data.add(new presetdata(direccion.substring(direccion.lastIndexOf("/")+1, direccion.lastIndexOf(" ")),
                         direccion.substring(direccion.lastIndexOf(" "), direccion.lastIndexOf(".")),
-                        ""+c.get(Calendar.DATE)+"/"+c.get(Calendar.MONTH)+"/"+c.get(Calendar.YEAR), R.drawable.ic_launcher_foreground));
+                        ""+c.get(Calendar.DATE)+"/"+c.get(Calendar.MONTH)+"/"+c.get(Calendar.YEAR), R.drawable.fondo));
+
+
+
             }
         }
         return data;

@@ -49,7 +49,7 @@ public class MyReceiver extends BroadcastReceiver {
                     Log.i(TAG, "onReceive: " + filename);
                     File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/apk", filename);
                     Log.i(TAG, "onReceive: " + file.getAbsolutePath());
-                    receiverListener.onInstall(file);
+                    //receiverListener.onInstall(file);
                     cursor.close();
                 }
             }
