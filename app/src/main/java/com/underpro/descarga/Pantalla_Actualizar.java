@@ -112,8 +112,8 @@ public class Pantalla_Actualizar extends AppCompatActivity {
                 c.setTime(d);
                 if((direccion.substring(direccion.lastIndexOf("."),direccion.length())).equals(".apk"))
                 data.add(new presetdata(direccion.substring(direccion.lastIndexOf("/")+1, direccion.lastIndexOf(" ")),
-                        direccion.substring(direccion.lastIndexOf(" "), direccion.lastIndexOf(".")),
-                        ""+c.get(Calendar.DATE)+"/"+c.get(Calendar.MONTH)+"/"+c.get(Calendar.YEAR), R.drawable.fondo));
+                        "Version: "+direccion.substring(direccion.lastIndexOf(" "), direccion.lastIndexOf(".")),
+                        "Fecha: "+c.get(Calendar.DATE)+"/"+c.get(Calendar.MONTH)+"/"+c.get(Calendar.YEAR), R.mipmap.ic_launcher_round));
 
 
 
