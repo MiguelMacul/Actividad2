@@ -8,8 +8,8 @@
     android:paddingRight="5dp">
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="387dp"
+        android:layout_height="270dp"
         android:baselineAligned="true"
         android:orientation="horizontal"
         android:paddingBottom="15dp"
@@ -30,8 +30,8 @@
 
                 <ImageView
                     android:id="@+id/foto"
-                    android:layout_width="355dp"
-                    android:layout_height="276dp"
+                    android:layout_width="318dp"
+                    android:layout_height="243dp"
                     android:layout_weight="1"
                     android:paddingLeft="15dp"
                     android:paddingTop="10dp"
@@ -71,8 +71,8 @@
 
                     <ImageView
                         android:id="@+id/imageView2"
-                        android:layout_width="match_parent"
-                        android:layout_height="153dp"
+                        android:layout_width="203dp"
+                        android:layout_height="106dp"
                         app:srcCompat="@android:drawable/ic_menu_rotate" />
 
                     <TextView
