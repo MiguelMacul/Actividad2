@@ -13,6 +13,7 @@ import android.util.Log;
 import android.webkit.MimeTypeMap;
 import android.webkit.URLUtil;
 
+import com.underpro.descarga.Pantalla_Actualizar;
 import com.underpro.descarga.ReceiverListener;
 
 import java.io.File;
@@ -25,11 +26,19 @@ public class MyReceiver extends BroadcastReceiver {
     private Context my_context;
     private Activity my_activity;
     private ReceiverListener receiverListener;
-
+    private boolean completado;
     public MyReceiver(Activity activity_, ReceiverListener receiverListener) {
         this.my_context = activity_;
         this.my_activity = activity_;
         this.receiverListener = receiverListener;
+    }
+
+    public boolean isCompletado() {
+        return completado;
+    }
+
+    public void setCompletado(boolean completado) {
+        this.completado = completado;
     }
 
     @Override
@@ -50,6 +59,8 @@ public class MyReceiver extends BroadcastReceiver {
                     File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/apk", filename);
                     Log.i(TAG, "onReceive: " + file.getAbsolutePath());
                     //receiverListener.onInstall(file);
+                    Pantalla_Actualizar object=(Pantalla_Actualizar)context;
+                    object.cargadatos();
                     cursor.close();
                 }
             }
@@ -63,7 +74,7 @@ public class MyReceiver extends BroadcastReceiver {
         // String url=
         // "https://firebasestorage.googleapis.com/v0/b/toks-4278b.appspot.com/o/Descarga%201.1.0.apk?alt=media&token=7e71ed09-0ad9-44f4-b303-eb0a526bd134";
         //https://firebasestorage.googleapis.com/v0/b/toks-4278b.appspot.com/o/Descarga%202.0.0.apk?alt=media&token=b6388f8f-6247-42dd-96f5-48f7801e20f9
-
+        this.setCompletado(false);
         Log.i(TAG, "Descargar: " + url);
         DownloadManager.Request my_Request;
 

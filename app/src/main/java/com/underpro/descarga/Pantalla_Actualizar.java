@@ -4,10 +4,12 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +29,7 @@ public class Pantalla_Actualizar extends AppCompatActivity {
     private adaptador adaptadordatos;
     private RecyclerView recyclerViewDatos;
     private ReceiverListener receiverListener;
+    private  List<presetdata> data;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pantalla_actualizar);
@@ -40,10 +43,12 @@ public class Pantalla_Actualizar extends AppCompatActivity {
             public void onClick(View view) {
                 if (view.getId()==R.id.btn_Actualizar){
                 oMyReceiver.Descargar(url);
-                    cargadatos();
                 }
             }
         });
+    }
+    public Pantalla_Actualizar(){
+        this.data=null;
     }
     public void cargadatos(){
         RecyclerView recyclerView = (RecyclerView) this.findViewById(R.id.reciclercontenedor);
@@ -51,6 +56,7 @@ public class Pantalla_Actualizar extends AppCompatActivity {
         recyclerViewDatos.setLayoutManager(new LinearLayoutManager(this));
         adaptador adapterunionRecycler = new adaptador(obtenerDatos());
         this.adaptadordatos = adapterunionRecycler;
+        new ItemTouchHelper(itemTouch).attachToRecyclerView(recyclerViewDatos);
         this.recyclerViewDatos.setAdapter(this.adaptadordatos);
         adaptadordatos.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,10 +87,12 @@ public class Pantalla_Actualizar extends AppCompatActivity {
 
                 }
                 startActivity(pantallaInstall);
+
                 Log.e("MsjDescarga", "Se descargo sin problemas");
             }
         };
         oMyReceiver = new MyReceiver(Pantalla_Actualizar.this, receiverListener);
+        System.out.println("asd");
     }
     @Override
     protected void onPause() {
@@ -95,12 +103,12 @@ public class Pantalla_Actualizar extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         oMyReceiver.registrar(oMyReceiver);
+        cargadatos();
     }
 
     public List<presetdata> obtenerDatos() {
-        List<presetdata> data=new ArrayList<>() ;
+       data=new ArrayList<>() ;
         File f = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "apk");
         if(f.exists()){
             File file[] = f.listFiles();
@@ -119,6 +127,19 @@ public class Pantalla_Actualizar extends AppCompatActivity {
         return data;
     }
 
+    ItemTouchHelper.SimpleCallback itemTouch=new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT){
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
+            return false;
+        }
 
-
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+            data.remove(viewHolder.getAdapterPosition());
+            File f = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "apk");
+            File file[] = f.listFiles();
+            file[viewHolder.getAdapterPosition()].delete();
+            cargadatos();
+        }
+    };
 }
