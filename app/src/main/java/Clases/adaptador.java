@@ -1,14 +1,14 @@
 package Clases;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.underpro.descarga.R;
+
 import java.util.List;
 
 public class adaptador extends RecyclerView.Adapter<adaptador.ViewHolder> implements  View.OnClickListener{
@@ -60,5 +60,7 @@ public class adaptador extends RecyclerView.Adapter<adaptador.ViewHolder> implem
                 listener.onClick(view);
             }
     }
+
+
 
 }

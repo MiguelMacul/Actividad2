@@ -1,10 +1,13 @@
 package com.underpro.descarga;
+
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,15 +16,19 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+
 import Clases.MyReceiver;
 import Clases.adaptador;
 import Clases.presetdata;
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
+
 public class Pantalla_Actualizar extends AppCompatActivity {
     private MyReceiver oMyReceiver;
     private Button btn_descargar;
@@ -127,7 +134,8 @@ public class Pantalla_Actualizar extends AppCompatActivity {
         return data;
     }
 
-    ItemTouchHelper.SimpleCallback itemTouch=new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT){
+
+    ItemTouchHelper.SimpleCallback itemTouch=new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT){
         @Override
         public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
             return false;
@@ -140,6 +148,16 @@ public class Pantalla_Actualizar extends AppCompatActivity {
             File file[] = f.listFiles();
             file[viewHolder.getAdapterPosition()].delete();
             cargadatos();
+        }
+
+        @Override
+        public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+            new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                    .addSwipeLeftBackgroundColor(ContextCompat.getColor(Pantalla_Actualizar.this,R.color.cardview_light_background))
+                    .addSwipeLeftActionIcon(R.drawable.eliminar)
+                    .create()
+                    .decorate();
+            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
         }
     };
 }

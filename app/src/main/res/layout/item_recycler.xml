@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#00FFFFFF"
+    android:background="@android:color/transparent"
     android:paddingLeft="5dp"
     android:paddingRight="5dp">
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="385dp"
-        android:layout_height="117dp"
-        android:background="#00FFFFFF"
+        android:layout_width="366dp"
+        android:layout_height="114dp"
+        android:background="@android:color/transparent"
         android:baselineAligned="true"
         android:orientation="horizontal"
         android:paddingBottom="5dp"
@@ -24,20 +24,22 @@
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="111dp"
-            android:background="#00FFFFFF"
-            app:cardBackgroundColor="#00FFFFFF">
+            android:layout_height="match_parent"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="0dp">
 
             <LinearLayout
-                android:layout_width="383dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/forma"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:persistentDrawingCache="all">
 
                 <ImageView
                     android:id="@+id/foto"
-                    android:layout_width="98dp"
-                    android:layout_height="91dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="107dp"
                     android:layout_weight="1"
                     android:paddingLeft="15dp"
                     android:paddingTop="10dp"
@@ -46,13 +48,15 @@
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <LinearLayout
-                    android:layout_width="160dp"
+                    android:layout_width="226dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="5dp"
                     android:layout_weight="1"
                     android:orientation="vertical"
+                    android:outlineAmbientShadowColor="@android:color/transparent"
+                    android:outlineSpotShadowColor="@android:color/transparent"
                     android:paddingLeft="5dp"
                     android:paddingTop="5dp"
                     android:paddingRight="5dp"
@@ -60,7 +64,7 @@
 
                     <TextView
                         android:id="@+id/app"
-                        android:layout_width="212dp"
+                        android:layout_width="131dp"
                         android:layout_height="wrap_content"
                         android:baselineAligned="false"
                         android:text="        Versión"
@@ -69,7 +73,7 @@
 
                     <TextView
                         android:id="@+id/version"
-                        android:layout_width="212dp"
+                        android:layout_width="131dp"
                         android:layout_height="wrap_content"
                         android:lineSpacingExtra="8sp"
                         android:text="               TextView"
@@ -79,19 +83,21 @@
 
                     <ImageView
                         android:id="@+id/imageView2"
-                        android:layout_width="135dp"
+                        android:layout_width="210dp"
                         android:layout_height="wrap_content"
                         app:srcCompat="@android:drawable/ic_menu_rotate" />
 
                     <TextView
                         android:id="@+id/fecha"
-                        android:layout_width="212dp"
+                        android:layout_width="157dp"
                         android:layout_height="wrap_content"
                         android:text="TextView"
                         android:textColor="@android:color/black"
                         android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
+
+
         </android.support.v7.widget.CardView>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
